@@ -14,7 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainActivity extends AppCompatActivity implements AddCodeFragment.OnFragmentInteractionListener, Observer {
+public class MainActivity extends AppCompatActivity implements AddCodeFragment.OnFragmentInteractionListener, CustomView {
     MainPresenter presenter;
     CustomRecyclerAdapter recyclerAdapter;
     RecyclerView codeList;
@@ -25,16 +25,10 @@ public class MainActivity extends AppCompatActivity implements AddCodeFragment.O
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        recyclerAdapter.updateData(o);
+    public void update(Object o) {
+        UserDataModel model = (UserDataModel) o;
+        recyclerAdapter.updateData(model);
     }
-
-//    @Override
-//    public void update() {
-//        UserDataModel model = UserDataModel.getInstance();
-//        localDataset = model.getLocalData();
-//        recyclerAdapter.notifyDataSetChanged();
-//    }
 
     // ClickListener for RecyclerView
     private class ListClickListener implements RecyclerClickListener {
@@ -51,16 +45,12 @@ public class MainActivity extends AppCompatActivity implements AddCodeFragment.O
 
         presenter = new MainPresenter();
         presenter.setUpUser(1);
-        presenter.setUpObserver(this);
+        presenter.setUpView(this);
 
         codeList = findViewById(R.id.codelist_recycler);
         codeList.setLayoutManager(new LinearLayoutManager(this));
         recyclerAdapter = new CustomRecyclerAdapter(new ListClickListener());
         codeList.setAdapter(recyclerAdapter);
-
-
-
-//        presenter.setUpView(this);
 
         // Initialize addCityButton
         final FloatingActionButton addCityButton = findViewById(R.id.codelist_btn_add);

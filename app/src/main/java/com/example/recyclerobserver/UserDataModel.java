@@ -3,20 +3,19 @@ package com.example.recyclerobserver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 
-public class UserDataModel extends Observable {
+public class UserDataModel {
 
     HashMap<Integer, User> userList;
-    
-    CustomView view;
+
+    ArrayList<CustomView> views;
 
     private UserDataModel() {
         this.userList = new HashMap<>();
+        this.views = new ArrayList<>();
     }
 
     private static final UserDataModel userDataModel = new UserDataModel();
-
 
     private Integer userID;
 
@@ -30,14 +29,13 @@ public class UserDataModel extends Observable {
 
     public void addCode(ScannableCode code) {
         userList.get(this.userID).getUserCodeList().add(code);
-        setChanged();
-        notifyObservers();
-//        updateViews();
+
+        updateViews();
     }
 
     private void updateViews() {
-        if (view != null) {
-            view.update();
+        for (CustomView view: views) {
+            view.update(this);
         }
     }
 
@@ -47,12 +45,17 @@ public class UserDataModel extends Observable {
         if (!userList.containsKey(userID)) {
             userList.put(userID, new User(userID));
         }
-//        setChanged();
-//        notifyObservers();
-//        view.update();
     }
 
     public void addView(CustomView view) {
-        this.view = view;
+        if (!views.contains(view)) {
+            views.add(view);
+        }
+    }
+
+    public void deleteView(CustomView view) {
+        if (views.contains(view)) {
+            views.remove(view);
+        }
     }
 }

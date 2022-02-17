@@ -4,8 +4,6 @@ import java.util.Observer;
 
 public class MainPresenter {
 
-
-
     public void addNewCode(ScannableCode code) {
         UserDataModel model = UserDataModel.getInstance();
         model.addCode(code);
@@ -16,18 +14,13 @@ public class MainPresenter {
         model.setUserID(userID);
     }
 
-    public void setUpObserver(Observer arg) {
-        UserDataModel model = UserDataModel.getInstance();
-        model.addObserver(arg);
-    }
-
-    public void removeObserver(Observer arg) {
-        UserDataModel model = UserDataModel.getInstance();
-        model.deleteObserver(arg);
-    }
-
     public void setUpView(CustomView view) {
         UserDataModel model = UserDataModel.getInstance();
         model.addView(view);
+    }
+
+    public void removeView(CustomView view) {
+        UserDataModel model = UserDataModel.getInstance();
+        model.deleteView(view);
     }
 }

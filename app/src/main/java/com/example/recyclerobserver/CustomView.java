@@ -1,6 +1,5 @@
 package com.example.recyclerobserver;
 
 public interface CustomView {
-    void update();
-
+    void update(Object o);
 }

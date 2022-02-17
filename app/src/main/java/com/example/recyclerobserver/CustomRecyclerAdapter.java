@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAdapter.ViewHolder> {
 
@@ -31,7 +30,6 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
         return new ViewHolder(view);    }
 
     // Bind data to view holder
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // Get element from your dataset at this position and replace the
@@ -57,8 +55,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
         }
     }
 
-    public void updateData(Observable o) {
-        UserDataModel model = (UserDataModel) o;
+    public void updateData(UserDataModel model) {
         localDataset = model.getLocalData();
         notifyDataSetChanged();
     }
