@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements AddCodeFragment.O
 
     @Override
     public void update(Observable o, Object arg) {
-        recyclerAdapter.updateData(o);
+        recyclerAdapter.updateData();
     }
 
     // ClickListener for RecyclerView

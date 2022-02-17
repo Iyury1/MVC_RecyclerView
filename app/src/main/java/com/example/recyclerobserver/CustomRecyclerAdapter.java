@@ -14,12 +14,10 @@ import java.util.Observable;
 public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAdapter.ViewHolder> {
 
     RecyclerClickListener listener;
-    ArrayList<ScannableCode> localDataset;
 
     CustomRecyclerAdapter(RecyclerClickListener listener) {
         this.listener = listener;
-        UserDataModel model = UserDataModel.getInstance();
-        localDataset = model.getLocalData();
+
     }
 
     // Create View Holder and inflate view
@@ -36,6 +34,9 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        UserDataModel model = UserDataModel.getInstance();
+        ArrayList<ScannableCode> localDataset = model.getLocalData();
+
         holder.getCodeName().setText(localDataset.get(position).getCodeName());
         holder.getCodeScore().setText(localDataset.get(position).getCodeScore());
 
@@ -50,16 +51,15 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
     // Return number of items in Adapter
     @Override
     public int getItemCount() {
-        if (localDataset != null) {
-            return localDataset.size();
+        UserDataModel model = UserDataModel.getInstance();
+        if (model.getLocalData() != null) {
+            return model.getLocalData().size();
         } else {
             return 0;
         }
     }
 
-    public void updateData(Observable o) {
-        UserDataModel model = (UserDataModel) o;
-        localDataset = model.getLocalData();
+    public void updateData() {
         notifyDataSetChanged();
     }
 
