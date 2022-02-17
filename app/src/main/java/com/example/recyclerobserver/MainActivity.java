@@ -29,13 +29,6 @@ public class MainActivity extends AppCompatActivity implements AddCodeFragment.O
         recyclerAdapter.updateData(o);
     }
 
-//    @Override
-//    public void update() {
-//        UserDataModel model = UserDataModel.getInstance();
-//        localDataset = model.getLocalData();
-//        recyclerAdapter.notifyDataSetChanged();
-//    }
-
     // ClickListener for RecyclerView
     private class ListClickListener implements RecyclerClickListener {
         @Override
@@ -57,10 +50,6 @@ public class MainActivity extends AppCompatActivity implements AddCodeFragment.O
         codeList.setLayoutManager(new LinearLayoutManager(this));
         recyclerAdapter = new CustomRecyclerAdapter(new ListClickListener());
         codeList.setAdapter(recyclerAdapter);
-
-
-
-//        presenter.setUpView(this);
 
         // Initialize addCityButton
         final FloatingActionButton addCityButton = findViewById(R.id.codelist_btn_add);

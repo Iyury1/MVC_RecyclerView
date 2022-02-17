@@ -8,15 +8,12 @@ import java.util.Observable;
 public class UserDataModel extends Observable {
 
     HashMap<Integer, User> userList;
-    
-    CustomView view;
 
     private UserDataModel() {
         this.userList = new HashMap<>();
     }
 
     private static final UserDataModel userDataModel = new UserDataModel();
-
 
     private Integer userID;
 
@@ -32,13 +29,6 @@ public class UserDataModel extends Observable {
         userList.get(this.userID).getUserCodeList().add(code);
         setChanged();
         notifyObservers();
-//        updateViews();
-    }
-
-    private void updateViews() {
-        if (view != null) {
-            view.update();
-        }
     }
 
     public void setUserID(Integer userID) {
@@ -47,12 +37,5 @@ public class UserDataModel extends Observable {
         if (!userList.containsKey(userID)) {
             userList.put(userID, new User(userID));
         }
-//        setChanged();
-//        notifyObservers();
-//        view.update();
-    }
-
-    public void addView(CustomView view) {
-        this.view = view;
     }
 }

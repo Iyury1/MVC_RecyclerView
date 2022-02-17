@@ -4,8 +4,6 @@ import java.util.Observer;
 
 public class MainPresenter {
 
-
-
     public void addNewCode(ScannableCode code) {
         UserDataModel model = UserDataModel.getInstance();
         model.addCode(code);
@@ -26,8 +24,4 @@ public class MainPresenter {
         model.deleteObserver(arg);
     }
 
-    public void setUpView(CustomView view) {
-        UserDataModel model = UserDataModel.getInstance();
-        model.addView(view);
-    }
 }
